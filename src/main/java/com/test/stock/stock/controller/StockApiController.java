@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.test.stock.stock.controller.response.ApiStockResponse;
 import com.test.stock.stock.model.StockFluctuationPrice;
+import com.test.stock.stock.model.StockInfo;
 import com.test.stock.stock.model.StockProfit;
 import com.test.stock.stock.service.StockService;
 
@@ -33,16 +34,14 @@ public class StockApiController {
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/api/stock/yahoo/{symbol}")
 	public ApiStockResponse profitByYahoo(@PathVariable String symbol) {
-		StockProfit stockProfit = yahooStockService.choice(symbol);
-		List<StockFluctuationPrice> stockPrices = yahooStockService.investigate(symbol);
-		return ApiStockResponse.from(stockProfit, stockPrices);
+		StockInfo stockInfo = yahooStockService.findStockStatistics(symbol);
+		return ApiStockResponse.from(stockInfo);
 	}
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/api/stock/unibits/{symbol}")
 	public ApiStockResponse profitByUniBits(@PathVariable String symbol) {
-		StockProfit stockProfit = unibitsStockService.choice(symbol);
-		List<StockFluctuationPrice> stockPrices = unibitsStockService.investigate(symbol);
-		return ApiStockResponse.from(stockProfit, stockPrices);
+		StockInfo stockInfo = unibitsStockService.findStockStatistics(symbol);
+		return ApiStockResponse.from(stockInfo);
 	}
 }

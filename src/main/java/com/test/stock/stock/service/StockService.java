@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import com.test.stock.stock.model.Money;
 import com.test.stock.stock.model.StockFluctuationPrice;
+import com.test.stock.stock.model.StockInfo;
 import com.test.stock.stock.model.StockProfit;
 import com.test.stock.stock.repository.StockRepository;
 import com.test.stock.stock.repository.strategy.Strategy;
@@ -30,17 +31,23 @@ public abstract class StockService {
 
 	abstract StockFluctuationPrice adjustSpareStockPrice(String symbol, Period period);
 
-	public StockProfit choice(String symbol) {
-		return choice(symbol, new Day());
+	public StockInfo findStockStatistics(String symbol) {
+		return findStockStatistics(symbol, new Day());
 	}
 
-	public StockProfit choice(String symbol, Frequency frequency) {
+	public StockInfo findStockStatistics(String symbol, Frequency frequency) {
+		List<StockFluctuationPrice> pretreatedStockPrices = investigate(symbol, frequency);
+		StockProfit stockProfit = search(pretreatedStockPrices);
+		return new StockInfo(stockProfit, pretreatedStockPrices);
+	}
+
+	public StockProfit findStockProfit(String symbol) {
+		return findStockProfit(symbol, new Day());
+	}
+
+	public StockProfit findStockProfit(String symbol, Frequency frequency) {
 		List<StockFluctuationPrice> pretreatedStockPrices = investigate(symbol, frequency);
 		return search(pretreatedStockPrices);
-	}
-
-	public List<StockFluctuationPrice> investigate(String symbol) {
-		return investigate(symbol, new Day());
 	}
 
 	public List<StockFluctuationPrice> investigate(String symbol, Frequency frequency) {

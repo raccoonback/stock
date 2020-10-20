@@ -16,7 +16,7 @@ import com.test.stock.stock.repository.strategy.yahoo.frequency.type.Day;
  */
 
 @SpringBootTest
-public class UniBitsServiceTest {
+class UniBitsServiceTest {
 
 	@Autowired()
 	@Qualifier("unibitsStockService")
@@ -30,10 +30,10 @@ public class UniBitsServiceTest {
 	@DisplayName("애플 - UniBits와 Yahoo Thirdparty api 에 대한 결과가 동일해야만 한다.")
 	void shouldSame_uniBits_and_yahoo_maxProfit_ofApple() {
 		// given
-		StockProfit profitByDayUsingYahoo = stockService.choice("AAPL", new Day());
+		StockProfit profitByDayUsingYahoo = stockService.findStockProfit("AAPL");
 
 		// when
-		StockProfit profitUsingUniBits = uniBitsService.choice("AAPL");
+		StockProfit profitUsingUniBits = uniBitsService.findStockProfit("AAPL");
 
 		// then
 		assertEquals(profitByDayUsingYahoo.getStart(),profitUsingUniBits.getStart());
@@ -45,10 +45,10 @@ public class UniBitsServiceTest {
 	@DisplayName("구글 - UniBits와 Yahoo Thirdparty api 에 대한 결과가 동일해야만 한다.")
 	void shouldSame_uniBits_and_yahoo_maxProfit_ofGoogle() {
 		// given
-		StockProfit profitByDayUsingYahoo = stockService.choice("GOOG", new Day());
+		StockProfit profitByDayUsingYahoo = stockService.findStockProfit("GOOG");
 
 		// when
-		StockProfit profitUsingUniBits = uniBitsService.choice("GOOG");
+		StockProfit profitUsingUniBits = uniBitsService.findStockProfit("GOOG");
 
 		// then
 		assertEquals(profitByDayUsingYahoo.getStart(),profitUsingUniBits.getStart());

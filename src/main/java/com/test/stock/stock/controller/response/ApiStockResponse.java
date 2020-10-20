@@ -3,8 +3,7 @@ package com.test.stock.stock.controller.response;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.test.stock.stock.model.StockFluctuationPrice;
-import com.test.stock.stock.model.StockProfit;
+import com.test.stock.stock.model.StockInfo;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -22,11 +21,13 @@ public class ApiStockResponse {
 	private ApiStockProfitResponse stockProfit;
 	private List<ApiStockPriceResponse> stockPrices;
 
-	public static ApiStockResponse from(StockProfit stockProfit, List<StockFluctuationPrice> stockFluctuationPrices) {
-		List<ApiStockPriceResponse> stockPrices = stockFluctuationPrices.stream()
+	public static ApiStockResponse from(StockInfo stockInfo) {
+		List<ApiStockPriceResponse> stockPrices = stockInfo.getStockFluctuationPrices()
+			.stream()
 			.map(ApiStockPriceResponse::from)
 			.collect(Collectors.toList());
 
-		return new ApiStockResponse(ApiStockProfitResponse.from(stockProfit), stockPrices);
+		ApiStockProfitResponse profit = ApiStockProfitResponse.from(stockInfo.getStockProfit());
+		return new ApiStockResponse(profit, stockPrices);
 	}
 }

@@ -17,7 +17,7 @@ import com.test.stock.stock.repository.strategy.yahoo.frequency.type.Week;
  */
 
 @SpringBootTest
-public class YahooStockServiceTest {
+class YahooStockServiceTest {
 
 	@Autowired
 	@Qualifier("yahooStockService")
@@ -27,10 +27,10 @@ public class YahooStockServiceTest {
 	@DisplayName("구글 - 일 단위와 월 단위의 최대 수익이 동일해야만 한다.")
 	void shouldSameGoogleMaxProfit_betweenDaysAndMonth() {
 		// given
-		StockProfit profitByWeeks = stockService.choice("GOOG", new Month());
+		StockProfit profitByWeeks = stockService.findStockProfit("GOOG", new Month());
 
 		// when
-		StockProfit profitByDays = stockService.choice("GOOG");
+		StockProfit profitByDays = stockService.findStockProfit("GOOG");
 
 		// then
 		assertEquals(profitByDays.getProfit().getValue(), profitByWeeks.getProfit().getValue());
@@ -40,10 +40,10 @@ public class YahooStockServiceTest {
 	@DisplayName("구글 - 일 단위와 주 단위의 최대 수익이 동일해야만 한다.")
 	void shouldSameGoogleMaxProfit_betweenDaysAndWeeks() {
 		// given
-		StockProfit profitByWeeks = stockService.choice("GOOG", new Week());
+		StockProfit profitByWeeks = stockService.findStockProfit("GOOG", new Week());
 
 		// when
-		StockProfit profitByDays = stockService.choice("GOOG");
+		StockProfit profitByDays = stockService.findStockProfit("GOOG");
 
 		// then
 		assertEquals(profitByDays.getProfit().getValue(), profitByWeeks.getProfit().getValue());
@@ -53,10 +53,10 @@ public class YahooStockServiceTest {
 	@DisplayName("애플 - 일 단위와 월 단위의 최대 수익이 동일해야만 한다.")
 	void shouldSameAppleMaxProfit_betweenDaysAndMonth() {
 		// given
-		StockProfit profitByWeeks = stockService.choice("AAPL", new Month());
+		StockProfit profitByWeeks = stockService.findStockProfit("AAPL", new Month());
 
 		// when
-		StockProfit profitByDays = stockService.choice("AAPL");
+		StockProfit profitByDays = stockService.findStockProfit("AAPL");
 
 		// then
 		assertEquals(profitByDays.getProfit().getValue(), profitByWeeks.getProfit().getValue());
@@ -66,10 +66,10 @@ public class YahooStockServiceTest {
 	@DisplayName("애플 - 일 단위와 주 단위의 최대 수익이 동일해야만 한다.")
 	void shouldSameAppleMaxProfit_betweenDaysAndWeeks() {
 		// given
-		StockProfit profitByWeeks = stockService.choice("AAPL", new Week());
+		StockProfit profitByWeeks = stockService.findStockProfit("AAPL", new Week());
 
 		// when
-		StockProfit profitByDays = stockService.choice("AAPL");
+		StockProfit profitByDays = stockService.findStockProfit("AAPL");
 
 		// then
 		assertEquals(profitByDays.getProfit().getValue(), profitByWeeks.getProfit().getValue());
