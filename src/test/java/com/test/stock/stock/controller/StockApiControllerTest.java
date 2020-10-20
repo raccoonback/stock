@@ -21,6 +21,7 @@ import com.test.stock.stock.model.Money;
 import com.test.stock.stock.model.Price;
 import com.test.stock.stock.model.StockFluctuationPrice;
 import com.test.stock.stock.model.StockInfo;
+import com.test.stock.stock.model.Symbol;
 import com.test.stock.stock.service.StockService;
 
 /**
@@ -38,7 +39,7 @@ class StockApiControllerTest {
 	@Test
 	void shouldResponseEmptyStockProfit_ifHasNotProfitSegment() throws Exception {
 		// given
-		String symbol = "TEST";
+		Symbol symbol = new Symbol("Test");
 		List<StockFluctuationPrice> stockPrice = new ArrayList<>();
 		stockPrice.add(new StockFluctuationPrice(LocalDate.now(), new Price(new Money(100), new Money(100))));
 		stockPrice.add(new StockFluctuationPrice(LocalDate.now().plusDays(1), new Price(new Money(50), new Money(50))));
@@ -46,10 +47,10 @@ class StockApiControllerTest {
 
 		StockInfo stockInfo = new StockInfo(stockPrice);
 
-		given(stockService.findStockStatistics(symbol)).willReturn(stockInfo);
+		given(stockService.findStockStatistics(any())).willReturn(stockInfo);
 
 		// when
-		final ResultActions actions = mvc.perform(get("/api/stock/yahoo/{symbol}", symbol)
+		final ResultActions actions = mvc.perform(get("/api/stock/yahoo/{symbol}", symbol.getValue())
 			.contentType(MediaType.APPLICATION_JSON))
 			.andDo(print());
 

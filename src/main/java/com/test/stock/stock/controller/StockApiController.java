@@ -1,5 +1,7 @@
 package com.test.stock.stock.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.test.stock.stock.controller.response.ApiStockResponse;
 import com.test.stock.stock.model.StockInfo;
+import com.test.stock.stock.model.Symbol;
 import com.test.stock.stock.service.StockService;
 
 import lombok.RequiredArgsConstructor;
@@ -29,14 +32,14 @@ public class StockApiController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/api/stock/yahoo/{symbol}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ApiStockResponse profitByYahoo(@PathVariable String symbol) {
+	public ApiStockResponse profitByYahoo(@Valid @PathVariable Symbol symbol) {
 		StockInfo stockInfo = yahooStockService.findStockStatistics(symbol);
 		return ApiStockResponse.from(stockInfo);
 	}
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(value = "/api/stock/unibits/{symbol}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ApiStockResponse profitByUniBits(@PathVariable String symbol) {
+	public ApiStockResponse profitByUniBits(@Valid @PathVariable Symbol symbol) {
 		StockInfo stockInfo = unibitsStockService.findStockStatistics(symbol);
 		return ApiStockResponse.from(stockInfo);
 	}

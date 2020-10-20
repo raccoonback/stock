@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.test.stock.stock.model.StockFluctuationPrice;
+import com.test.stock.stock.model.Symbol;
 import com.test.stock.stock.repository.StockRepository;
 import com.test.stock.stock.service.strategy.Strategy;
 import com.test.stock.stock.service.strategy.unibits.UniBitsStrategy;
@@ -28,13 +29,13 @@ public class UnibitsStockService extends StockService {
 	}
 
 	@Override
-	protected Strategy getStrategy(String symbol, Frequency frequency) {
+	Strategy getStrategy(Symbol symbol, Frequency frequency) {
 		Period period = new Period(LocalDate.now().atStartOfDay(), PERIOD, frequency);
 		return new UniBitsStrategy(symbol, period, UNIBITS_API_KEY);
 	}
 
 	@Override
-	StockFluctuationPrice adjustSpareStockPrice(String symbol, Period period) {
+	StockFluctuationPrice adjustSpareStockPrice(Symbol symbol, Period period) {
 		return null;
 	}
 }

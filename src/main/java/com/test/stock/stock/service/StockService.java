@@ -5,11 +5,16 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
+import org.springframework.validation.annotation.Validated;
+
 import com.test.stock.exception.NotMeasurableException;
 import com.test.stock.stock.model.Money;
 import com.test.stock.stock.model.StockFluctuationPrice;
 import com.test.stock.stock.model.StockInfo;
 import com.test.stock.stock.model.StockProfit;
+import com.test.stock.stock.model.Symbol;
 import com.test.stock.stock.repository.StockRepository;
 import com.test.stock.stock.service.strategy.Strategy;
 import com.test.stock.stock.service.strategy.yahoo.Period;
@@ -24,20 +29,20 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 @Slf4j
+@Validated
 @RequiredArgsConstructor
 public abstract class StockService {
-
 	protected final StockRepository stockRepository;
 
-	abstract Strategy getStrategy(String symbol, Frequency frequency);
+	abstract Strategy getStrategy(Symbol symbol, Frequency frequency);
 
-	abstract StockFluctuationPrice adjustSpareStockPrice(String symbol, Period period);
+	abstract StockFluctuationPrice adjustSpareStockPrice(Symbol symbol, Period period);
 
-	public StockInfo findStockStatistics(String symbol) {
+	public StockInfo findStockStatistics(Symbol symbol) {
 		return findStockStatistics(symbol, new Day());
 	}
 
-	public StockInfo findStockStatistics(String symbol, Frequency frequency) {
+	public StockInfo findStockStatistics(@Valid Symbol symbol, Frequency frequency) {
 		List<StockFluctuationPrice> pretreatedStockPrices = investigate(symbol, frequency);
 		try {
 			StockProfit stockProfit = search(pretreatedStockPrices);
@@ -48,16 +53,16 @@ public abstract class StockService {
 		}
 	}
 
-	public StockProfit findStockProfit(String symbol) {
+	public StockProfit findStockProfit(Symbol symbol) {
 		return findStockProfit(symbol, new Day());
 	}
 
-	public StockProfit findStockProfit(String symbol, Frequency frequency) {
+	public StockProfit findStockProfit(@Valid Symbol symbol, Frequency frequency) {
 		List<StockFluctuationPrice> pretreatedStockPrices = investigate(symbol, frequency);
 		return search(pretreatedStockPrices);
 	}
 
-	public List<StockFluctuationPrice> investigate(String symbol, Frequency frequency) {
+	public List<StockFluctuationPrice> investigate(@Valid Symbol symbol, Frequency frequency) {
 		Strategy strategy = getStrategy(symbol, frequency);
 		List<StockFluctuationPrice> stockPrices = stockRepository.find(strategy);
 
@@ -84,7 +89,7 @@ public abstract class StockService {
 
 		StockFluctuationPrice minStockPrice = stockFluctuationPrices.get(minIndex);
 		StockFluctuationPrice maxStockPrice = stockFluctuationPrices.get(maxIndex);
-		Money maxProfit = initalizeMaxProfit(minStockPrice, maxStockPrice);
+		Money maxProfit = initializeMaxProfit(minStockPrice, maxStockPrice);
 		for (StockFluctuationPrice stockFluctuationPrice : stockFluctuationPrices) {
 			try {
 				Money profit = stockFluctuationPrice.getPrice().getSell().subtract(minStockPrice.getPrice().getBuy());
@@ -111,7 +116,7 @@ public abstract class StockService {
 		return new StockProfit(minStockPrice.getDate(), maxStockPrice.getDate(), maxProfit);
 	}
 
-	private Money initalizeMaxProfit(StockFluctuationPrice minStockPrice, StockFluctuationPrice maxStockPrice) {
+	private Money initializeMaxProfit(StockFluctuationPrice minStockPrice, StockFluctuationPrice maxStockPrice) {
 		try {
 			return maxStockPrice.getPrice().getSell().subtract(minStockPrice.getPrice().getBuy());
 		} catch (IllegalArgumentException exception) {

@@ -4,6 +4,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.test.stock.stock.model.Symbol;
 import com.test.stock.stock.service.strategy.AbsStrategy;
 
 import lombok.Getter;
@@ -17,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class YahooStrategy extends AbsStrategy {
 	private static final String RAPID_API = "https://rapidapi.p.rapidapi.com";
 
-	private final String symbol;
+	private final Symbol symbol;
 
 	@Getter
 	private final Period period;
@@ -30,7 +31,7 @@ public class YahooStrategy extends AbsStrategy {
 			.path("stock/v2/get-historical-data")
 			.queryParam("period1", period.getTailoredStartDateAccordingToFrequency())
 			.queryParam("period2", period.getEndTimestamp())
-			.queryParam("symbol", symbol)
+			.queryParam("symbol", symbol.getValue())
 			.queryParam("frequency", period.getFrequency().getSymbol())
 			.queryParam("filter", "history")
 			.toUriString();

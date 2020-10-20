@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.test.stock.stock.model.StockProfit;
+import com.test.stock.stock.model.Symbol;
 
 /**
  * Created by koseungbin on 2020-10-19
@@ -28,10 +29,11 @@ class UniBitsServiceTest {
 	@DisplayName("애플 - UniBits와 Yahoo Thirdparty api 에 대한 결과가 동일해야만 한다.")
 	void shouldSame_uniBits_and_yahoo_maxProfit_ofApple() {
 		// given
-		StockProfit profitByDayUsingYahoo = stockService.findStockProfit("AAPL");
+		Symbol symbol = new Symbol("AAPL");
+		StockProfit profitByDayUsingYahoo = stockService.findStockProfit(symbol);
 
 		// when
-		StockProfit profitUsingUniBits = uniBitsService.findStockProfit("AAPL");
+		StockProfit profitUsingUniBits = uniBitsService.findStockProfit(symbol);
 
 		// then
 		assertEquals(profitByDayUsingYahoo.getStart(), profitUsingUniBits.getStart());
@@ -44,10 +46,11 @@ class UniBitsServiceTest {
 	@DisplayName("구글 - UniBits와 Yahoo Thirdparty api 에 대한 결과가 동일해야만 한다.")
 	void shouldSame_uniBits_and_yahoo_maxProfit_ofGoogle() {
 		// given
-		StockProfit profitByDayUsingYahoo = stockService.findStockProfit("GOOG");
+		Symbol symbol = new Symbol("GOOG");
+		StockProfit profitByDayUsingYahoo = stockService.findStockProfit(symbol);
 
 		// when
-		StockProfit profitUsingUniBits = uniBitsService.findStockProfit("GOOG");
+		StockProfit profitUsingUniBits = uniBitsService.findStockProfit(symbol);
 
 		// then
 		assertEquals(profitByDayUsingYahoo.getStart(), profitUsingUniBits.getStart());

@@ -11,6 +11,7 @@ import com.test.stock.exception.NotFoundException;
 import com.test.stock.stock.model.Money;
 import com.test.stock.stock.model.Price;
 import com.test.stock.stock.model.StockFluctuationPrice;
+import com.test.stock.stock.model.Symbol;
 import com.test.stock.stock.repository.StockRepository;
 import com.test.stock.stock.service.strategy.Strategy;
 import com.test.stock.stock.service.strategy.yahoo.Period;
@@ -37,13 +38,13 @@ public class YahooStockService extends StockService {
 	}
 
 	@Override
-	protected Strategy getStrategy(String symbol, Frequency frequency) {
+	Strategy getStrategy(Symbol symbol, Frequency frequency) {
 		Period period = new Period(LocalDate.now().atStartOfDay(), PERIOD, frequency);
 		return new YahooStrategy(symbol, period, RAPID_API_HOST, RAPID_API_KEY);
 	}
 
 	@Override
-	StockFluctuationPrice adjustSpareStockPrice(String symbol, Period period) {
+	StockFluctuationPrice adjustSpareStockPrice(Symbol symbol, Period period) {
 		Strategy strategy = new YahooStrategy(symbol, period.asSparePeriod(), RAPID_API_HOST, RAPID_API_KEY);
 		try {
 			List<StockFluctuationPrice> stockPrices = stockRepository.find(strategy);
