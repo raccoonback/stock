@@ -1,10 +1,10 @@
-package com.test.stock.stock.repository.strategy.yahoo;
+package com.test.stock.stock.service.strategy.yahoo;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.test.stock.stock.repository.strategy.AbsStrategy;
+import com.test.stock.stock.service.strategy.AbsStrategy;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

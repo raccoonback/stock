@@ -1,6 +1,6 @@
-package com.test.stock.stock.repository.strategy.yahoo.frequency;
+package com.test.stock.stock.service.strategy.yahoo.frequency;
 
-import com.test.stock.stock.repository.strategy.yahoo.Period;
+import com.test.stock.stock.service.strategy.yahoo.Period;
 
 /**
  * Created by koseungbin on 2020-10-19

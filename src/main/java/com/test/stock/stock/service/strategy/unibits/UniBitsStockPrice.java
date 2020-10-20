@@ -1,11 +1,10 @@
-package com.test.stock.stock.repository.strategy.yahoo;
+package com.test.stock.stock.service.strategy.unibits;
 
-import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.TimeZone;
 
 import com.test.stock.stock.model.Money;
-import com.test.stock.stock.repository.StockPrice;
+import com.test.stock.stock.service.strategy.model.StockPrice;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,15 +19,20 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Getter
 @Setter
-public class YahooStockPrice implements StockPrice {
-	private Long date;
+
+public class UniBitsStockPrice implements StockPrice {
+	private LocalDate date;
+	@Getter
 	private double open;
+	@Getter
 	private double high;
+	@Getter
 	private double low;
+	@Getter
 	private double close;
-	private double adjclose;
+	@Getter
+	private double adj_close;
 
 	@Override
 	public Money getBuy() {
@@ -44,6 +48,6 @@ public class YahooStockPrice implements StockPrice {
 
 	@Override
 	public LocalDateTime getDate() {
-		return LocalDateTime.ofInstant(Instant.ofEpochSecond(date), TimeZone.getDefault().toZoneId());
+		return date.atStartOfDay();
 	}
 }

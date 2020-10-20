@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.test.stock.stock.model.StockProfit;
-import com.test.stock.stock.repository.strategy.yahoo.frequency.type.Day;
 
 /**
  * Created by koseungbin on 2020-10-19

@@ -1,12 +1,12 @@
-package com.test.stock.stock.repository.strategy;
+package com.test.stock.stock.service.strategy;
 
 import java.util.List;
 
 import org.springframework.http.HttpEntity;
 
 import com.test.stock.stock.model.StockFluctuationPrice;
-import com.test.stock.stock.repository.StockResponse;
-import com.test.stock.stock.repository.strategy.yahoo.Period;
+import com.test.stock.stock.service.strategy.model.StockResponse;
+import com.test.stock.stock.service.strategy.yahoo.Period;
 
 /**
  * Created by koseungbin on 2020-10-17

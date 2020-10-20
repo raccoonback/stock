@@ -1,11 +1,11 @@
-package com.test.stock.stock.repository.strategy.unibits;
+package com.test.stock.stock.service.strategy.unibits;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.test.stock.stock.repository.StockResponse;
-import com.test.stock.stock.repository.strategy.AbsStrategy;
-import com.test.stock.stock.repository.strategy.yahoo.Period;
+import com.test.stock.stock.service.strategy.model.StockResponse;
+import com.test.stock.stock.service.strategy.AbsStrategy;
+import com.test.stock.stock.service.strategy.yahoo.Period;
 
 import lombok.RequiredArgsConstructor;
 

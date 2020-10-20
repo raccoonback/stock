@@ -12,10 +12,10 @@ import com.test.stock.stock.model.Money;
 import com.test.stock.stock.model.Price;
 import com.test.stock.stock.model.StockFluctuationPrice;
 import com.test.stock.stock.repository.StockRepository;
-import com.test.stock.stock.repository.strategy.Strategy;
-import com.test.stock.stock.repository.strategy.yahoo.Period;
-import com.test.stock.stock.repository.strategy.yahoo.YahooStrategy;
-import com.test.stock.stock.repository.strategy.yahoo.frequency.Frequency;
+import com.test.stock.stock.service.strategy.Strategy;
+import com.test.stock.stock.service.strategy.yahoo.Period;
+import com.test.stock.stock.service.strategy.yahoo.YahooStrategy;
+import com.test.stock.stock.service.strategy.yahoo.frequency.Frequency;
 import com.test.stock.utils.DateUtils;
 
 /**

@@ -11,10 +11,10 @@ import com.test.stock.stock.model.StockFluctuationPrice;
 import com.test.stock.stock.model.StockInfo;
 import com.test.stock.stock.model.StockProfit;
 import com.test.stock.stock.repository.StockRepository;
-import com.test.stock.stock.repository.strategy.Strategy;
-import com.test.stock.stock.repository.strategy.yahoo.Period;
-import com.test.stock.stock.repository.strategy.yahoo.frequency.Frequency;
-import com.test.stock.stock.repository.strategy.yahoo.frequency.type.Day;
+import com.test.stock.stock.service.strategy.Strategy;
+import com.test.stock.stock.service.strategy.yahoo.Period;
+import com.test.stock.stock.service.strategy.yahoo.frequency.Frequency;
+import com.test.stock.stock.service.strategy.yahoo.frequency.type.Day;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

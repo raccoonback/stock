@@ -1,4 +1,4 @@
-package com.test.stock.stock.repository.strategy.yahoo.frequency;
+package com.test.stock.stock.service.strategy.yahoo.frequency;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

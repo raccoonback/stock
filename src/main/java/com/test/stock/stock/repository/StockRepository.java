@@ -9,7 +9,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.test.stock.exception.IllegalThirdpartyRequestException;
 import com.test.stock.stock.model.StockFluctuationPrice;
-import com.test.stock.stock.repository.strategy.Strategy;
+import com.test.stock.stock.service.strategy.model.StockResponse;
+import com.test.stock.stock.service.strategy.Strategy;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

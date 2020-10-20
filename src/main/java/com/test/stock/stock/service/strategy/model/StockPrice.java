@@ -1,4 +1,4 @@
-package com.test.stock.stock.repository;
+package com.test.stock.stock.service.strategy.model;
 
 import java.time.LocalDateTime;
 

@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.test.stock.stock.model.StockProfit;
-import com.test.stock.stock.repository.strategy.yahoo.frequency.type.Month;
-import com.test.stock.stock.repository.strategy.yahoo.frequency.type.Week;
+import com.test.stock.stock.service.strategy.yahoo.frequency.type.Month;
+import com.test.stock.stock.service.strategy.yahoo.frequency.type.Week;
 
 /**
  * Created by koseungbin on 2020-10-17

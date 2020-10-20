@@ -1,13 +1,10 @@
-package com.test.stock.stock.repository.strategy.unibits;
+package com.test.stock.stock.service.strategy.unibits;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import com.test.stock.stock.repository.StockResponse;
-import com.test.stock.stock.repository.strategy.yahoo.YahooStockPrice;
+import com.test.stock.stock.service.strategy.model.StockResponse;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

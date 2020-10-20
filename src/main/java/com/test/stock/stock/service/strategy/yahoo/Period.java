@@ -1,12 +1,12 @@
-package com.test.stock.stock.repository.strategy.yahoo;
+package com.test.stock.stock.service.strategy.yahoo;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 
-import com.test.stock.stock.repository.strategy.yahoo.frequency.type.Day;
-import com.test.stock.stock.repository.strategy.yahoo.frequency.Frequency;
+import com.test.stock.stock.service.strategy.yahoo.frequency.type.Day;
+import com.test.stock.stock.service.strategy.yahoo.frequency.Frequency;
 import com.test.stock.utils.DateUtils;
 
 import lombok.Getter;

@@ -1,9 +1,9 @@
-package com.test.stock.stock.repository.strategy.yahoo;
+package com.test.stock.stock.service.strategy.yahoo;
 
 import java.sql.Timestamp;
 import java.util.List;
 
-import com.test.stock.stock.repository.StockResponse;
+import com.test.stock.stock.service.strategy.model.StockResponse;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

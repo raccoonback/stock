@@ -1,6 +1,4 @@
-package com.test.stock.stock.repository.strategy.unibits;
-
-import java.time.LocalDate;
+package com.test.stock.stock.service.strategy.unibits;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +15,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Setter
 @ToString
-
 public class MetaData {
 	private String api_name;
 	private long num_total_data_points;
