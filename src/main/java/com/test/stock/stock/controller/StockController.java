@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class StockController {
 	@GetMapping(value = "/")
 	public String index() {
-		System.out.println("test");
 		return "index";
 	}
 }

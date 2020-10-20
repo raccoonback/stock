@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+    <script type="module" src="/static/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+<body>
+<section class="aria">
+    <div class="container" id="yahoo">
+        <h1>Yahoo</h1>
+        <h2 id="yahooSymbol">AAPL</h2>
+        <div class="chart">
+            <canvas id="yahooChart"></canvas>
+        </div>
+        <div class="card">
+            <div class="profit" id="yahooProfit"></div>
+            <label th:id="yahoo">
+                <input type="text" th:label="yahoo" placeholder="GOOG, AMZN ..."/>
+            </label>
+            <button type="button">보내기</button>
+        </div>
+    </div>
+    <div class="container" id="unibits">
+        <h1>UniBits</h1>
+        <h2 id="unibitsSymbol">AAPL</h2>
+        <div class="chart">
+            <canvas id="unibitsChart"></canvas>
+        </div>
+        <div class="card">
+            <div class="profit" id="unibitsProfit"></div>
+            <label th:id="unibits">
+                <input type="text" th:label="unibits" placeholder="GOOG, AMZN ..."/>
+            </label>
+            <button type="button">보내기</button>
+        </div>
+    </div>
+</section>
+</body>
+</html>
