@@ -39,7 +39,11 @@
 - [UniBits](https://unibit.ai/api/docs/V2.0/historical_stock_price)
 - [Yahoo Finance](https://rapidapi.com/apidojo/api/yahoo-finance1?endpoint=apiendpoint_a1e0ecc6-0a3a-43fd-8133-77a66d33f68c)
 
-## 🕶 how to run
+### 🧨 Caution
+- Yahoo Finance API는 월당 500개의 요청만으로 제한하고 있기 때문에, 많은 요청 과정에서 데이터 조회가 막힐 수 있습니다.
+- 또한, Yahoo Finance API 요청 처리가 오래 걸리기 때문에 초기에 차트 렌더링이 오래 지연될 수 있습니다.
+
+## 🕶 How to run
 > ./gradlew bootRun
 
 > ./gradlew test
