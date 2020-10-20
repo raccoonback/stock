@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -32,14 +33,14 @@ public class StockApiController {
 	private final StockService unibitsStockService;
 
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(value = "/api/stock/yahoo/{symbol}")
+	@GetMapping(value = "/api/stock/yahoo/{symbol}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ApiStockResponse profitByYahoo(@PathVariable String symbol) {
 		StockInfo stockInfo = yahooStockService.findStockStatistics(symbol);
 		return ApiStockResponse.from(stockInfo);
 	}
 
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(value = "/api/stock/unibits/{symbol}")
+	@GetMapping(value = "/api/stock/unibits/{symbol}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ApiStockResponse profitByUniBits(@PathVariable String symbol) {
 		StockInfo stockInfo = unibitsStockService.findStockStatistics(symbol);
 		return ApiStockResponse.from(stockInfo);
