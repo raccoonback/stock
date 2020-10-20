@@ -5,7 +5,6 @@ package com.test.stock.exception;
  */
 
 public class IllegalThirdpartyRequestException extends RuntimeException {
-
 	private final String message;
 
 	public IllegalThirdpartyRequestException(String message) {

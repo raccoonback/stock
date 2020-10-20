@@ -1,7 +1,5 @@
 package com.test.stock.stock.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,9 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.test.stock.stock.controller.response.ApiStockResponse;
-import com.test.stock.stock.model.StockFluctuationPrice;
 import com.test.stock.stock.model.StockInfo;
-import com.test.stock.stock.model.StockProfit;
 import com.test.stock.stock.service.StockService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 public class StockApiController {
-
 	@Qualifier(value = "yahooStockService")
 	private final StockService yahooStockService;
 

@@ -18,7 +18,6 @@ import com.test.stock.stock.service.strategy.yahoo.frequency.type.Week;
 
 @SpringBootTest
 class YahooStockServiceTest {
-
 	@Autowired
 	@Qualifier("yahooStockService")
 	private StockService stockService;

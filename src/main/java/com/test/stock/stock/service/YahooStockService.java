@@ -49,7 +49,9 @@ public class YahooStockService extends StockService {
 			List<StockFluctuationPrice> stockPrices = stockRepository.find(strategy);
 			Money min = minBuy(stockPrices);
 			Money max = maxSell(stockPrices);
-			return new StockFluctuationPrice(DateUtils.toLocalDate(strategy.getPeriod().getTailoredStartDateAccordingToFrequency()), new Price(min, max));
+			return new StockFluctuationPrice(
+				DateUtils.toLocalDate(strategy.getPeriod().getTailoredStartDateAccordingToFrequency()),
+				new Price(min, max));
 		} catch (NotFoundException exception) {
 			// 조정해야할 날짜가 없는 경우
 			return null;

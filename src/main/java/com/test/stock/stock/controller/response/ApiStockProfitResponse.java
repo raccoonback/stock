@@ -1,10 +1,7 @@
 package com.test.stock.stock.controller.response;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
-import com.test.stock.stock.model.StockFluctuationPrice;
 import com.test.stock.stock.model.StockProfit;
 
 import lombok.AccessLevel;
@@ -25,6 +22,7 @@ public class ApiStockProfitResponse {
 	private Double profit;
 
 	public static ApiStockProfitResponse from(StockProfit stockProfit) {
-		return new ApiStockProfitResponse(stockProfit.getStart(), stockProfit.getEnd(), stockProfit.getProfit().getValue());
+		return new ApiStockProfitResponse(stockProfit.getStart(), stockProfit.getEnd(),
+			stockProfit.getProfit().getValue());
 	}
 }

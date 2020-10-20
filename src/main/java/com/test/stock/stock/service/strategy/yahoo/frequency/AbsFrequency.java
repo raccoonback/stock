@@ -13,5 +13,4 @@ public abstract class AbsFrequency implements Frequency {
 
 	@Getter
 	private String symbol;
-
 }

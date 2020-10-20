@@ -9,7 +9,7 @@
 </head>
 <body>
 <section class="aria">
-    <div class="container" th:each="id : ${info}"  th:id="${id}">
+    <div class="container" th:each="id : ${info}" th:id="${id}">
         <h1 th:text="${#strings.capitalize(id)}"></h1>
         <h2 th:id="|${id}Symbol|" th:text="${initSymbol}"></h2>
         <div class="chart">

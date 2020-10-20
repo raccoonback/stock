@@ -3,8 +3,8 @@ package com.test.stock.stock.service.strategy.unibits;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.test.stock.stock.service.strategy.model.StockResponse;
 import com.test.stock.stock.service.strategy.AbsStrategy;
+import com.test.stock.stock.service.strategy.model.StockResponse;
 import com.test.stock.stock.service.strategy.yahoo.Period;
 
 import lombok.RequiredArgsConstructor;
@@ -30,7 +30,7 @@ public class UniBitsStrategy extends AbsStrategy {
 			.queryParam("startDate", period.getStartDate().toLocalDate())
 			.queryParam("endDate", period.getEndDate().toLocalDate())
 			.queryParam("dataType", "json")
-			.queryParam("accessKey",uniBitsApiKey)
+			.queryParam("accessKey", uniBitsApiKey)
 			.toUriString();
 	}
 

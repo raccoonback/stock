@@ -2,7 +2,6 @@ package com.test.stock.stock.controller.response;
 
 import java.time.LocalDate;
 
-import com.test.stock.stock.model.Money;
 import com.test.stock.stock.model.Price;
 import com.test.stock.stock.model.StockFluctuationPrice;
 
@@ -23,6 +22,7 @@ public class ApiStockPriceResponse {
 
 	public static ApiStockPriceResponse from(StockFluctuationPrice stockFluctuationPrice) {
 		Price price = stockFluctuationPrice.getPrice();
-		return new ApiStockPriceResponse(stockFluctuationPrice.getDate(), price.getSell().getValue(), price.getBuy().getValue());
+		return new ApiStockPriceResponse(stockFluctuationPrice.getDate(), price.getSell().getValue(),
+			price.getBuy().getValue());
 	}
 }

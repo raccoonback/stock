@@ -12,7 +12,6 @@ import com.test.stock.stock.service.strategy.yahoo.Period;
  * Created by koseungbin on 2020-10-17
  */
 
-
 public interface Strategy {
 	String getUri();
 

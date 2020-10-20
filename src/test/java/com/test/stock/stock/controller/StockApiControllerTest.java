@@ -7,7 +7,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -54,6 +53,7 @@ class StockApiControllerTest {
 			.contentType(MediaType.APPLICATION_JSON))
 			.andDo(print());
 
+		// then
 		actions.andExpect(status().isOk())
 			.andExpect(jsonPath("stockProfit").isEmpty())
 			.andExpect(jsonPath("stockPrices[0].date").value(stockPrice.get(0).getDate().toString()))

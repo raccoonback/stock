@@ -12,7 +12,9 @@ import com.test.stock.stock.model.StockFluctuationPrice;
 
 public interface StockPrice {
 	Money getBuy();
+
 	Money getSell();
+
 	LocalDateTime getDate();
 
 	default StockFluctuationPrice toStockFluctuationPrice() {

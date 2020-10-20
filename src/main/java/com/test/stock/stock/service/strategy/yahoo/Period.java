@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 
-import com.test.stock.stock.service.strategy.yahoo.frequency.type.Day;
 import com.test.stock.stock.service.strategy.yahoo.frequency.Frequency;
+import com.test.stock.stock.service.strategy.yahoo.frequency.type.Day;
 import com.test.stock.utils.DateUtils;
 
 import lombok.Getter;
@@ -16,7 +16,6 @@ import lombok.Getter;
  */
 
 public class Period {
-
 	@Getter
 	private LocalDateTime endDate;
 

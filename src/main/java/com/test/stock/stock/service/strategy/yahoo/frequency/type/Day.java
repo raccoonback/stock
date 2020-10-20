@@ -15,7 +15,6 @@ public class Day extends AbsFrequency {
 	@Override
 	public Long getSpareDays(Period period) {
 		return STUCK;
-
 	}
 
 	@Override

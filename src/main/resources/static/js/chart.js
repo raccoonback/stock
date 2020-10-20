@@ -45,7 +45,7 @@ function drow(id, data) {
 }
 
 function getProfitData(min, max) {
-    if(!!min && !!max) {
+    if (!!min && !!max) {
         return [{x: min.date, y: min.minPrice}, {x: max.date, y: max.maxPrice}];
     }
 

@@ -16,7 +16,6 @@ import com.test.stock.stock.model.StockProfit;
 
 @SpringBootTest
 class UniBitsServiceTest {
-
 	@Autowired()
 	@Qualifier("unibitsStockService")
 	StockService uniBitsService;
@@ -35,9 +34,10 @@ class UniBitsServiceTest {
 		StockProfit profitUsingUniBits = uniBitsService.findStockProfit("AAPL");
 
 		// then
-		assertEquals(profitByDayUsingYahoo.getStart(),profitUsingUniBits.getStart());
-		assertEquals(profitByDayUsingYahoo.getEnd(),profitUsingUniBits.getEnd());
-		assertEquals(Math.round(profitByDayUsingYahoo.getProfit().getValue()), Math.round(profitUsingUniBits.getProfit().getValue()));
+		assertEquals(profitByDayUsingYahoo.getStart(), profitUsingUniBits.getStart());
+		assertEquals(profitByDayUsingYahoo.getEnd(), profitUsingUniBits.getEnd());
+		assertEquals(Math.round(profitByDayUsingYahoo.getProfit().getValue()),
+			Math.round(profitUsingUniBits.getProfit().getValue()));
 	}
 
 	@Test
@@ -50,9 +50,10 @@ class UniBitsServiceTest {
 		StockProfit profitUsingUniBits = uniBitsService.findStockProfit("GOOG");
 
 		// then
-		assertEquals(profitByDayUsingYahoo.getStart(),profitUsingUniBits.getStart());
-		assertEquals(profitByDayUsingYahoo.getEnd(),profitUsingUniBits.getEnd());
-		assertEquals(Math.round(profitByDayUsingYahoo.getProfit().getValue()), Math.round(profitUsingUniBits.getProfit().getValue()));
+		assertEquals(profitByDayUsingYahoo.getStart(), profitUsingUniBits.getStart());
+		assertEquals(profitByDayUsingYahoo.getEnd(), profitUsingUniBits.getEnd());
+		assertEquals(Math.round(profitByDayUsingYahoo.getProfit().getValue()),
+			Math.round(profitUsingUniBits.getProfit().getValue()));
 
 	}
 }

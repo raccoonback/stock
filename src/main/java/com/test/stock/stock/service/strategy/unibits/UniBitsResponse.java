@@ -25,7 +25,7 @@ public class UniBitsResponse implements StockResponse {
 
 	@Override
 	public List<UniBitsStockPrice> getPrices() {
-		for(String key : result_data.keySet()) {
+		for (String key : result_data.keySet()) {
 			return result_data.get(key);
 		}
 

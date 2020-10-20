@@ -9,8 +9,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.test.stock.exception.IllegalThirdpartyRequestException;
 import com.test.stock.stock.model.StockFluctuationPrice;
-import com.test.stock.stock.service.strategy.model.StockResponse;
 import com.test.stock.stock.service.strategy.Strategy;
+import com.test.stock.stock.service.strategy.model.StockResponse;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,6 @@ import lombok.extern.slf4j.Slf4j;
 @Repository
 @RequiredArgsConstructor
 public class StockRepository {
-
 	private final RestTemplate restTemplate;
 
 	public List<StockFluctuationPrice> find(Strategy strategy) {
@@ -36,5 +35,4 @@ public class StockRepository {
 
 		return strategy.transfer(response.getBody());
 	}
-
 }

@@ -5,7 +5,6 @@ package com.test.stock.exception;
  */
 
 public class NotMeasurableException extends RuntimeException {
-
 	private final String message;
 
 	public NotMeasurableException(String message) {

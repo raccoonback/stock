@@ -15,7 +15,7 @@ import com.test.stock.stock.service.strategy.model.StockResponse;
 public abstract class AbsStrategy implements Strategy {
 	@Override
 	public List<StockFluctuationPrice> transfer(StockResponse prices) {
-		if(prices == null || prices.isInvalid()) {
+		if (prices == null || prices.isInvalid()) {
 			throw new NotFoundException("존재하지 않는 종목입니다. 다시 확인해주세요.");
 		}
 

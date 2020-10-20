@@ -84,7 +84,6 @@ public abstract class StockService {
 
 		StockFluctuationPrice minStockPrice = stockFluctuationPrices.get(minIndex);
 		StockFluctuationPrice maxStockPrice = stockFluctuationPrices.get(maxIndex);
-
 		Money maxProfit = initalizeMaxProfit(minStockPrice, maxStockPrice);
 		for (StockFluctuationPrice stockFluctuationPrice : stockFluctuationPrices) {
 			try {

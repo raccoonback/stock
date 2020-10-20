@@ -31,7 +31,7 @@ public class ApiStockResponse {
 			.map(ApiStockPriceResponse::from)
 			.collect(Collectors.toList());
 
-		if(stockInfo.hasProfit()) {
+		if (stockInfo.hasProfit()) {
 			ApiStockProfitResponse profit = ApiStockProfitResponse.from(stockInfo.getStockProfit());
 			return new ApiStockResponse(profit, stockPrices);
 		}
