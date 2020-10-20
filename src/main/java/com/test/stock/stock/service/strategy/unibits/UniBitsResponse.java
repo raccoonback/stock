@@ -9,16 +9,14 @@ import com.test.stock.stock.service.strategy.model.StockResponse;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * Created by koseungbin on 2020-10-17
  */
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Setter
-@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class UniBitsResponse implements StockResponse {
 	private MetaData meta_data;
 	private Map<String, List<UniBitsStockPrice>> result_data;

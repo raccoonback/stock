@@ -15,14 +15,10 @@ import lombok.Getter;
  * Created by koseungbin on 2020-10-19
  */
 
+@Getter
 public class Period {
-	@Getter
 	private LocalDateTime endDate;
-
-	@Getter
 	private long days;
-
-	@Getter
 	private Frequency frequency;
 
 	public Period(LocalDateTime endDate, long days, Frequency frequency) {

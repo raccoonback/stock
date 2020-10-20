@@ -11,17 +11,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * Created by koseungbin on 2020-10-18
  */
 
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class YahooStockPrice implements StockPrice {
 	private Long date;
 	private double open;

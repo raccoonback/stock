@@ -10,17 +10,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * Created by koseungbin on 2020-10-18
  */
 
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 @Setter
-
+@NoArgsConstructor
+@AllArgsConstructor
 public class UniBitsStockPrice implements StockPrice {
 	private LocalDate date;
 	@Getter

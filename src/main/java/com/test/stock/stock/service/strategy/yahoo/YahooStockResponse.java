@@ -7,15 +7,15 @@ import com.test.stock.stock.service.strategy.model.StockResponse;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.Setter;
 
 /**
  * Created by koseungbin on 2020-10-17
  */
 
-@AllArgsConstructor
+@Setter
 @NoArgsConstructor
-@ToString
+@AllArgsConstructor
 public class YahooStockResponse implements StockResponse {
 	private List<YahooStockPrice> prices;
 	private boolean isPending;
