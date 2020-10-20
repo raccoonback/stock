@@ -52,7 +52,7 @@ public class Period {
 	}
 
 	public boolean isStartDateSameAsMonday() {
-		return getStartDate().getDayOfWeek() == DayOfWeek.MONDAY;
+		return getStartDate().getDayOfWeek().equals(DayOfWeek.MONDAY);
 	}
 
 	public Long countUntilNextMonth() {
