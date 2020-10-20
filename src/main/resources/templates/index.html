@@ -9,30 +9,16 @@
 </head>
 <body>
 <section class="aria">
-    <div class="container" id="yahoo">
-        <h1>Yahoo</h1>
-        <h2 id="yahooSymbol">AAPL</h2>
+    <div class="container" th:each="id : ${info}"  th:id="${id}">
+        <h1 th:text="${#strings.capitalize(id)}"></h1>
+        <h2 th:id="|${id}Symbol|" th:text="${initSymbol}"></h2>
         <div class="chart">
-            <canvas id="yahooChart"></canvas>
+            <canvas th:id="|${id}Chart|"></canvas>
         </div>
         <div class="card">
-            <div class="profit" id="yahooProfit"></div>
-            <label th:id="yahoo">
-                <input type="text" th:label="yahoo" placeholder="GOOG, AMZN ..."/>
-            </label>
-            <button type="button">보내기</button>
-        </div>
-    </div>
-    <div class="container" id="unibits">
-        <h1>UniBits</h1>
-        <h2 id="unibitsSymbol">AAPL</h2>
-        <div class="chart">
-            <canvas id="unibitsChart"></canvas>
-        </div>
-        <div class="card">
-            <div class="profit" id="unibitsProfit"></div>
-            <label th:id="unibits">
-                <input type="text" th:label="unibits" placeholder="GOOG, AMZN ..."/>
+            <div class="profit" th:id="|${id}Profit|"></div>
+            <label th:id="${id}">
+                <input type="text" th:label="${id}" placeholder="GOOG, AMZN ..."/>
             </label>
             <button type="button">보내기</button>
         </div>
