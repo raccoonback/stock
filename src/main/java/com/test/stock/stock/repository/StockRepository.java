@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
-import com.test.stock.exeption.IllegalThirdPartyRequestException;
+import com.test.stock.exception.IllegalThirdpartyRequestException;
 import com.test.stock.stock.model.StockFluctuationPrice;
 import com.test.stock.stock.repository.strategy.Strategy;
 
@@ -30,7 +30,7 @@ public class StockRepository {
 			.exchange(strategy.getUri(), HttpMethod.GET, strategy.getHttpEntity(), strategy.getResponseType());
 
 		if (response.getStatusCode().isError()) { // 4XX or 5XX
-			throw new IllegalThirdPartyRequestException(strategy.getUri() + " 요청 과정에서 에러 발생");
+			throw new IllegalThirdpartyRequestException(strategy.getUri() + " 요청 과정에서 에러 발생");
 		}
 
 		return strategy.transfer(response.getBody());
