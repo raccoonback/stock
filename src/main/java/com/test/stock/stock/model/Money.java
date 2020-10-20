@@ -1,14 +1,12 @@
 package com.test.stock.stock.model;
 
 import lombok.Getter;
-import lombok.ToString;
 
 /**
  * Created by koseungbin on 2020-10-17
  */
 
 @Getter
-@ToString
 public class Money {
 	private final double value;
 
@@ -26,6 +24,10 @@ public class Money {
 
 	public boolean hasBalance() {
 		return value > 0.0;
+	}
+
+	public boolean hasNotBalance() {
+		return !hasBalance();
 	}
 
 	public Money subtract(Money money) {

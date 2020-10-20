@@ -3,18 +3,18 @@ package com.test.stock.stock.service;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.test.stock.exception.NotMeasurableException;
 import com.test.stock.stock.model.Money;
 import com.test.stock.stock.model.StockFluctuationPrice;
 import com.test.stock.stock.model.StockInfo;
 import com.test.stock.stock.model.StockProfit;
 import com.test.stock.stock.repository.StockRepository;
 import com.test.stock.stock.repository.strategy.Strategy;
-import com.test.stock.stock.repository.strategy.yahoo.frequency.type.Day;
-import com.test.stock.stock.repository.strategy.yahoo.frequency.Frequency;
 import com.test.stock.stock.repository.strategy.yahoo.Period;
+import com.test.stock.stock.repository.strategy.yahoo.frequency.Frequency;
+import com.test.stock.stock.repository.strategy.yahoo.frequency.type.Day;
 
 import lombok.RequiredArgsConstructor;
 
@@ -70,35 +70,46 @@ public abstract class StockService {
 	}
 
 	private StockProfit search(List<StockFluctuationPrice> stockFluctuationPrices) {
-		Optional<StockProfit> maximumStockProfit = Optional.empty();
-		for (int start = 0; start < stockFluctuationPrices.size(); ++start) {
-			for (int end = start + 1; end < stockFluctuationPrices.size(); ++end) {
-				StockFluctuationPrice startStockPrice = stockFluctuationPrices.get(start);
-				StockFluctuationPrice endStockPrice = stockFluctuationPrices.get(end);
-				Money buy = startStockPrice.getPrice().getBuy();
-				Money sell = endStockPrice.getPrice().getSell();
-				try {
-					Money profit = sell.subtract(buy);
-					if (profit.hasBalance()) {
-						StockProfit stockProfit = new StockProfit(startStockPrice.getDate(), endStockPrice.getDate(),
-							profit);
-						if (maximumStockProfit.isPresent()) {
-							Money rest = stockProfit.getProfit().subtract(maximumStockProfit.get().getProfit());
-							if (rest.hasBalance()) {
-								maximumStockProfit = Optional.of(stockProfit);
-							}
+		int minIndex = 0, maxIndex = 1;
+		if (stockFluctuationPrices == null || stockFluctuationPrices.size() < maxIndex) {
+			throw new NotMeasurableException("최대 수익을 측정할 수 있는 데이터가 부족합니다");
+		}
 
-						} else {
-							maximumStockProfit = Optional.of(stockProfit);
-						}
-					}
-				} catch (Exception error) {
-					// Money 객체가 음수가 된 경우
-					// ignored
+		StockFluctuationPrice minStockPrice = stockFluctuationPrices.get(minIndex);
+		StockFluctuationPrice maxStockPrice = stockFluctuationPrices.get(maxIndex);
+
+		Money maxProfit = initalizeMaxProfit(minStockPrice, maxStockPrice);
+		for (StockFluctuationPrice stockFluctuationPrice : stockFluctuationPrices) {
+			try {
+				Money profit = stockFluctuationPrice.getPrice().getSell().subtract(minStockPrice.getPrice().getBuy());
+				if (profit.getValue() > maxProfit.getValue()) {
+					maxProfit = profit;
+					maxStockPrice = stockFluctuationPrice;
+				}
+			} catch (IllegalArgumentException exception) {
+				// 현재 수익 금액(Money)가 음수인 경우에 에러가 발생
+				// ignored
+			} finally {
+				if (stockFluctuationPrice.getPrice().getBuy().getValue() < minStockPrice.getPrice()
+					.getBuy()
+					.getValue()) {
+					minStockPrice = stockFluctuationPrice;
 				}
 			}
 		}
 
-		return maximumStockProfit.orElseThrow(() -> new IllegalStateException("적합한 범위가 없습니다."));
+		if (maxProfit.hasNotBalance()) {
+			throw new NotMeasurableException("최대 수익이 가능한 상승 구간이 없습니다.");
+		}
+
+		return new StockProfit(minStockPrice.getDate(), maxStockPrice.getDate(), maxProfit);
+	}
+
+	private Money initalizeMaxProfit(StockFluctuationPrice minStockPrice, StockFluctuationPrice maxStockPrice) {
+		try {
+			return maxStockPrice.getPrice().getSell().subtract(minStockPrice.getPrice().getBuy());
+		} catch (IllegalArgumentException exception) {
+			return new Money(0.0);
+		}
 	}
 }
