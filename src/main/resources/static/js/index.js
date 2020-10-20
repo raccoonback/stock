@@ -81,11 +81,12 @@ function debounce(func, success, fail) {
             setTimeoutId = setTimeout(async () => {
                 try {
                     const statisticsData = await func(id, symbol);
-                    setTimeoutId = null;
                     success(symbol, statisticsData);
                 } catch (error) {
                     alert(error.message);
                     fail();
+                } finally {
+                    setTimeoutId = null;
                 }
             }, 0);
         }
