@@ -34,7 +34,7 @@ public class StockApiController {
 	@GetMapping(value = "/api/stock/yahoo/{symbol}")
 	public ApiStockResponse profitByYahoo(@PathVariable String symbol) {
 		StockProfit stockProfit = yahooStockService.choice(symbol);
-		List<StockFluctuationPrice> stockPrices = yahooStockService.find(symbol);
+		List<StockFluctuationPrice> stockPrices = yahooStockService.investigate(symbol);
 		return ApiStockResponse.from(stockProfit, stockPrices);
 	}
 
@@ -42,7 +42,7 @@ public class StockApiController {
 	@GetMapping(value = "/api/stock/unibits/{symbol}")
 	public ApiStockResponse profitByUniBits(@PathVariable String symbol) {
 		StockProfit stockProfit = unibitsStockService.choice(symbol);
-		List<StockFluctuationPrice> stockPrices = unibitsStockService.find(symbol);
+		List<StockFluctuationPrice> stockPrices = unibitsStockService.investigate(symbol);
 		return ApiStockResponse.from(stockProfit, stockPrices);
 	}
 }

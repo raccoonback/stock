@@ -35,15 +35,15 @@ public abstract class StockService {
 	}
 
 	public StockProfit choice(String symbol, Frequency frequency) {
-		List<StockFluctuationPrice> pretreatedStockPrices = find(symbol, frequency);
+		List<StockFluctuationPrice> pretreatedStockPrices = investigate(symbol, frequency);
 		return search(pretreatedStockPrices);
 	}
 
-	public List<StockFluctuationPrice> find(String symbol) {
-		return find(symbol, new Day());
+	public List<StockFluctuationPrice> investigate(String symbol) {
+		return investigate(symbol, new Day());
 	}
 
-	public List<StockFluctuationPrice> find(String symbol, Frequency frequency) {
+	public List<StockFluctuationPrice> investigate(String symbol, Frequency frequency) {
 		Strategy strategy = getStrategy(symbol, frequency);
 		List<StockFluctuationPrice> stockPrices = stockRepository.find(strategy);
 
