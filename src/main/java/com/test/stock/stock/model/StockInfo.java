@@ -14,4 +14,12 @@ import lombok.Getter;
 public class StockInfo {
 	private StockProfit stockProfit;
 	private List<StockFluctuationPrice> stockFluctuationPrices;
+
+	public StockInfo(List<StockFluctuationPrice> stockFluctuationPrices) {
+		this.stockFluctuationPrices = stockFluctuationPrices;
+	}
+
+	public boolean hasProfit() {
+		return stockProfit != null;
+	}
 }

@@ -34,7 +34,7 @@ function drow(id, data) {
                         'rgba(153, 102, 255, 1)',
                         'rgba(255, 159, 64, 1)'
                     ],
-                    data: [{x: min.date, y: min.minPrice}, {x: max.date, y: max.maxPrice}],
+                    data: getProfitData(min, max),
                     borderWidth: 5,
                     order: 1
                 }
@@ -44,12 +44,20 @@ function drow(id, data) {
     });
 }
 
+function getProfitData(min, max) {
+    if(!!min && !!max) {
+        return [{x: min.date, y: min.minPrice}, {x: max.date, y: max.maxPrice}];
+    }
+
+    return [];
+}
+
 function updateChart(chart, data) {
     const {dates, high, low, min, max} = data;
     chart.data.labels = dates;
     chart.data.datasets[0].data = high;
     chart.data.datasets[1].data = low;
-    chart.data.datasets[2].data = [{x: min.date, y: min.minPrice}, {x: max.date, y: max.maxPrice}];
+    chart.data.datasets[2].data = getProfitData(min, max);
     chart.update();
 }
 

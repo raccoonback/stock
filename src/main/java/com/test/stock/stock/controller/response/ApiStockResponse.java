@@ -21,13 +21,21 @@ public class ApiStockResponse {
 	private ApiStockProfitResponse stockProfit;
 	private List<ApiStockPriceResponse> stockPrices;
 
+	private ApiStockResponse(List<ApiStockPriceResponse> stockPrices) {
+		this.stockPrices = stockPrices;
+	}
+
 	public static ApiStockResponse from(StockInfo stockInfo) {
 		List<ApiStockPriceResponse> stockPrices = stockInfo.getStockFluctuationPrices()
 			.stream()
 			.map(ApiStockPriceResponse::from)
 			.collect(Collectors.toList());
 
-		ApiStockProfitResponse profit = ApiStockProfitResponse.from(stockInfo.getStockProfit());
-		return new ApiStockResponse(profit, stockPrices);
+		if(stockInfo.hasProfit()) {
+			ApiStockProfitResponse profit = ApiStockProfitResponse.from(stockInfo.getStockProfit());
+			return new ApiStockResponse(profit, stockPrices);
+		}
+
+		return new ApiStockResponse(stockPrices);
 	}
 }

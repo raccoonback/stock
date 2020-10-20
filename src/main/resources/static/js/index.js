@@ -26,7 +26,7 @@ function registerHandler(chart, id) {
     const successCallback = (symbol, statisticsData) => {
         const {profit, ...prices} = statisticsData;
         updateChart(chart, prices);
-        updateSymnbol(id, symbol);
+        updateSymbol(id, symbol);
         updateProfit(id, profit);
 
         input.value = '';
@@ -53,18 +53,25 @@ function registerHandler(chart, id) {
     });
 }
 
-function updateSymnbol(id, symbol) {
+function updateSymbol(id, symbol) {
     const element = document.querySelector(`#${id}Symbol`);
     element.innerText = symbol;
 }
 
-function updateProfit(id, {startDate, endDate, profit}) {
+function updateProfit(id, stockProfit) {
     const element = document.querySelector(`#${id}Profit`);
-    element.innerHTML = `
-            <span class="startDate">${startDate}</span> ~
-            <span class="endDate">${endDate}</span> :
-            <span class="amount">${profit}</span> USD
-    `;
+    if (!!stockProfit) {
+        const {startDate, endDate, profit} = stockProfit;
+        element.innerHTML = `
+            <span>${startDate}</span> ~
+            <span>${endDate}</span> :
+            <span>${profit}</span> USD
+        `;
+    } else {
+        element.innerHTML = `
+            <span>최대 수익 구간이 존재하지 않습니다.</span> 
+        `;
+    }
 }
 
 function debounce(func, success, fail) {

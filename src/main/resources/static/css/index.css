@@ -1,9 +1,7 @@
-
 .aria {
     margin: auto 5em;
     display: flex;
     flex-direction: row;
-    /*flex-wrap: wrap;*/
 }
 
 .container {
@@ -41,4 +39,3 @@ button {
     padding: 1em 3em;
     font-size: 1em;
 }
-

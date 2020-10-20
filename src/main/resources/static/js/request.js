@@ -25,14 +25,16 @@ async function getTimeSerialAndProfit(api, symbol) {
     const response = await requestApi(`/api/stock/${api}/${symbol}`);
     feedback(api, symbol, response);
     const {stockProfit, stockPrices} = await response.json();
-    return {
-        dates: stockPrices.map(it => it.date),
-        high: stockPrices.map(it => it.maxPrice),
-        low: stockPrices.map(it => it.minPrice),
-        max: stockPrices.find(it => it.date === stockProfit.endDate),
-        min: stockPrices.find(it => it.date === stockProfit.startDate),
-        profit: stockProfit
+    const dates = stockPrices.map(it => it.date);
+    const high = stockPrices.map(it => it.maxPrice);
+    const low = stockPrices.map(it => it.minPrice);
+    if (!stockProfit) {
+        return {dates, high, low};
     }
+
+    const max = stockPrices.find(it => it.date === stockProfit.endDate);
+    const min = stockPrices.find(it => it.date === stockProfit.startDate);
+    return {dates, high, low, max, min, profit: stockProfit};
 }
 
 function requestApi(uri) {
@@ -40,7 +42,11 @@ function requestApi(uri) {
     let tryCount = 1;
     return (async function request() {
         try {
-            return fetch(uri, {method: 'GET'});
+            return fetch(uri, {
+                method: 'GET', headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
         } catch (error) {
             if (tryCount >= maximumTryCount) {
                 throw new Error("확인되지 않은 에러가 발생하였습니다. 잠시후 다시 시도해주세요.");

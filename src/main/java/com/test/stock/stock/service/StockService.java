@@ -17,11 +17,13 @@ import com.test.stock.stock.repository.strategy.yahoo.frequency.Frequency;
 import com.test.stock.stock.repository.strategy.yahoo.frequency.type.Day;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Created by koseungbin on 2020-10-17
  */
 
+@Slf4j
 @RequiredArgsConstructor
 public abstract class StockService {
 
@@ -37,8 +39,13 @@ public abstract class StockService {
 
 	public StockInfo findStockStatistics(String symbol, Frequency frequency) {
 		List<StockFluctuationPrice> pretreatedStockPrices = investigate(symbol, frequency);
-		StockProfit stockProfit = search(pretreatedStockPrices);
-		return new StockInfo(stockProfit, pretreatedStockPrices);
+		try {
+			StockProfit stockProfit = search(pretreatedStockPrices);
+			return new StockInfo(stockProfit, pretreatedStockPrices);
+		} catch (NotMeasurableException exception) {
+			log.info("not found max profit segment", exception);
+			return new StockInfo(pretreatedStockPrices);
+		}
 	}
 
 	public StockProfit findStockProfit(String symbol) {
