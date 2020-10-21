@@ -81,30 +81,32 @@ public abstract class StockService {
 			.collect(Collectors.toList());
 	}
 
-	private StockProfit search(List<StockFluctuationPrice> stockFluctuationPrices) {
-		int minIndex = 0, maxIndex = 1;
-		if (stockFluctuationPrices == null || stockFluctuationPrices.size() < maxIndex) {
+	public StockProfit search(List<StockFluctuationPrice> stockFluctuationPrices) {
+		int minIndex = 0, maxIndex = 1, minFluctuationSize = 2;
+		if (stockFluctuationPrices == null || stockFluctuationPrices.size() <= maxIndex) {
 			throw new NotMeasurableException("최대 수익을 측정할 수 있는 데이터가 부족합니다");
 		}
 
 		StockFluctuationPrice minStockPrice = stockFluctuationPrices.get(minIndex);
 		StockFluctuationPrice maxStockPrice = stockFluctuationPrices.get(maxIndex);
 		Money maxProfit = initializeMaxProfit(minStockPrice, maxStockPrice);
-		for (StockFluctuationPrice stockFluctuationPrice : stockFluctuationPrices) {
-			try {
-				Money profit = stockFluctuationPrice.getPrice().getSell().subtract(minStockPrice.getPrice().getBuy());
-				if (profit.getValue() > maxProfit.getValue()) {
-					maxProfit = profit;
-					maxStockPrice = stockFluctuationPrice;
-				}
-			} catch (IllegalArgumentException exception) {
-				// 현재 수익 금액(Money)가 음수인 경우에 에러가 발생
-				// ignored
-			} finally {
-				if (stockFluctuationPrice.getPrice().getBuy().getValue() < minStockPrice.getPrice()
-					.getBuy()
-					.getValue()) {
-					minStockPrice = stockFluctuationPrice;
+		if(stockFluctuationPrices.size() > minFluctuationSize) {
+			for (StockFluctuationPrice stockFluctuationPrice : stockFluctuationPrices) {
+				try {
+					Money profit = stockFluctuationPrice.getPrice().getSell().subtract(minStockPrice.getPrice().getBuy());
+					if (profit.getValue() > maxProfit.getValue()) {
+						maxProfit = profit;
+						maxStockPrice = stockFluctuationPrice;
+					}
+				} catch (IllegalStateException exception) {
+					// 현재 수익 금액(Money)가 음수인 경우에 에러가 발생
+					// ignored
+				} finally {
+					if (stockFluctuationPrice.getPrice().getBuy().getValue() < minStockPrice.getPrice()
+						.getBuy()
+						.getValue()) {
+						minStockPrice = stockFluctuationPrice;
+					}
 				}
 			}
 		}
@@ -119,7 +121,7 @@ public abstract class StockService {
 	private Money initializeMaxProfit(StockFluctuationPrice minStockPrice, StockFluctuationPrice maxStockPrice) {
 		try {
 			return maxStockPrice.getPrice().getSell().subtract(minStockPrice.getPrice().getBuy());
-		} catch (IllegalArgumentException exception) {
+		} catch (IllegalStateException exception) {
 			return new Money(0.0);
 		}
 	}
