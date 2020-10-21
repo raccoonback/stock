@@ -1,4 +1,4 @@
-package com.test.stock.stock.service;
+package com.test.stock.stock.service.integrate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.test.stock.stock.model.StockProfit;
 import com.test.stock.stock.model.Symbol;
+import com.test.stock.stock.service.StockService;
 
 /**
  * Created by koseungbin on 2020-10-19

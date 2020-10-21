@@ -1,4 +1,4 @@
-package com.test.stock.stock.controller;
+package com.test.stock.stock.controller.unit;
 
 import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
