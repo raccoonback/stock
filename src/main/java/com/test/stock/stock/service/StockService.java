@@ -90,13 +90,14 @@ public abstract class StockService {
 		StockFluctuationPrice minStockPrice = stockFluctuationPrices.get(minIndex);
 		StockFluctuationPrice maxStockPrice = stockFluctuationPrices.get(maxIndex);
 		Money maxProfit = initializeMaxProfit(minStockPrice, maxStockPrice);
+		StockProfit stockProfit =  new StockProfit(minStockPrice.getDate(), maxStockPrice.getDate(), maxProfit);
 		if(stockFluctuationPrices.size() > minFluctuationSize) {
 			for (StockFluctuationPrice stockFluctuationPrice : stockFluctuationPrices) {
 				try {
 					Money profit = stockFluctuationPrice.getPrice().getSell().subtract(minStockPrice.getPrice().getBuy());
-					if (profit.getValue() > maxProfit.getValue()) {
-						maxProfit = profit;
+					if (profit.getValue() > stockProfit.getProfit().getValue()) {
 						maxStockPrice = stockFluctuationPrice;
+						stockProfit.update(minStockPrice.getDate(), maxStockPrice.getDate(), profit);
 					}
 				} catch (IllegalStateException exception) {
 					// 현재 수익 금액(Money)가 음수인 경우에 에러가 발생
@@ -115,7 +116,7 @@ public abstract class StockService {
 			throw new NotMeasurableException("최대 수익이 가능한 상승 구간이 없습니다.");
 		}
 
-		return new StockProfit(minStockPrice.getDate(), maxStockPrice.getDate(), maxProfit);
+		return stockProfit;
 	}
 
 	private Money initializeMaxProfit(StockFluctuationPrice minStockPrice, StockFluctuationPrice maxStockPrice) {
