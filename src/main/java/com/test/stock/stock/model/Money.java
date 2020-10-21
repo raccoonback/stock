@@ -1,5 +1,6 @@
 package com.test.stock.stock.model;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 /**
@@ -7,6 +8,7 @@ import lombok.Getter;
  */
 
 @Getter
+@EqualsAndHashCode()
 public class Money {
 	private final double value;
 
