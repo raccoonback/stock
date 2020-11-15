@@ -44,6 +44,12 @@
 - 또한, Yahoo Finance API 요청 처리가 오래 걸리기 때문에 초기에 차트 렌더링이 오래 지연될 수 있습니다.
 
 ## 🕶 How to run
+
+### Prepared
+
+> [application.yml](/src/main/resources/application.yml) 파일에 Stock Third Party API 추가 필요 
+
+### Run
 > ./gradlew bootRun
 
 > ./gradlew test

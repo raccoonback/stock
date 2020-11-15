@@ -1,0 +1,20 @@
+spring:
+  thymeleaf:
+    prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML5
+    cache: false
+    template-resolver-order: 0
+  mvc:
+    static-path-pattern: /static/**
+  resources:
+    static-locations: classpath:/static/
+    add-mappings: true
+
+# Stock Third Party API 추가 필요
+rapid-api:
+  host:
+  key:
+unibits-api:
+  key:
